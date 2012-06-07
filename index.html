@@ -1,63 +1,76 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-	<head>
-		<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width" />
-		<title>Training App</title>
-		<link rel="stylesheet" href="assets/css/master.css" type="text/css" media="screen" />
-		
-		<script src="phonegap.js" type="text/javascript" charset="utf-8"></script>
-		
-		<script src="assets/js/xui.js" type="text/javascript" charset="utf-8"></script>
-		
-		<script src="assets/js/lawnchair/adaptors/LawnchairAdaptorHelpers.js" type="text/javascript" charset="utf-8"></script>
-		
-		<script src="assets/js/lawnchair/adaptors/DOMStorageAdaptor.js" type="text/javascript" charset="utf-8"></script>
-		
-		<script src="assets/js/lawnchair/adaptors/WebkitSQLiteAdaptor.js" type="text/javascript" charset="utf-8"></script>
-		
-		<script src="assets/js/lawnchair/Lawnchair.js" type="text/javascript" charset="utf-8"></script>
-		
-		<script src="assets/js/dsl.js" type="text/javascript" charset="utf-8"></script>
-		
-		<script src="assets/js/app.js" type="text/javascript" charset="utf-8"></script>
-		
-	</head>
-	<body>
- 		<div id="title_bar">Phone<strong>Gap</strong> Training App</div>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile: Demos and Documentation</title>
+	<link rel="stylesheet"  href="css/themes/default/jquery.mobile-1.1.0.css" />
+	<link rel="stylesheet" href="docs/_assets/css/jqm-docs.css" />
+	<script src="js/jquery.js"></script>
+	<script src="docs/_assets/js/jqm-docs.js"></script>
+	<script src="js/jquery.mobile-1.1.0.js"></script>
+	
+</head>
+<body>
+<div data-role="page" class="type-home">
+	<div data-role="content">
+		<p id="jqm-version">1.1.0 Final Release</p>
 
-		<div id="welcome" class="view">
-		  <div class="app_button" id="map_button"> Hello my friend Show My Location</div>
-  	      <div class="app_button" id="settings_button">Settings</div>
+
+		<div class="content-secondary">
+
+			<div id="jqm-homeheader">
+				<h1 id="jqm-logo"><img src="docs/_assets/images/jquery-logo.png" alt="jQuery Mobile Framework" /></h1>
+				<p>A Touch-Optimized UI Framework built with jQuery and HTML5.</p>
+			</div>
+
+
+			<p class="intro"><strong>Welcome.</strong> jQuery Mobile is the easiest way to build sites and apps that are accessible on all popular smartphone, tablet and desktop devices. For jQuery 1.6.4 and 1.7.1.</p>
+
+			<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="f">
+				<li data-role="list-divider">Overview</li>
+				<li><a href="docs/about/intro.html">Intro to jQuery Mobile</a></li>
+				<li><a href="docs/about/getting-started.html">Quick start guide</a></li>
+				<li><a href="docs/about/features.html">Features</a></li>
+				<li><a href="docs/about/accessibility.html">Accessibility</a></li>
+				<li><a href="docs/about/platforms.html">Supported platforms</a></li>
+			</ul>
+
+		</div><!--/content-primary-->
+
+		<div class="content-primary">
+			<nav>
+
+
+				<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b">
+					<li data-role="list-divider">Components</li>
+					<li><a href="docs/pages/index.html">Pages &amp; dialogs</a></li>
+					<li><a href="docs/toolbars/index.html">Toolbars</a></li>
+					<li><a href="docs/buttons/index.html">Buttons</a></li>
+					<li><a href="docs/content/index.html">Content formatting</a></li>
+					<li><a href="docs/forms/index.html">Form elements</a></li>
+					<li><a href="docs/lists/index.html">List views</a></li>
+
+					<li data-role="list-divider">API</li>
+					<li><a href="docs/api/globalconfig.html">Configuring defaults</a></li>
+					<li><a href="docs/api/events.html">Events</a></li>
+					<li><a href="docs/api/methods.html">Methods &amp; Utilities</a></li>
+					<li><a href="docs/api/data-attributes.html">Data attribute reference</a></li>
+					<li><a href="docs/api/themes.html">Theme framework</a></li>
+
+
+				</ul>
+			</nav>
 		</div>
 
-		<div id="map" class="view">
-		  <div class="map_image">
-              <img id="static_map" src="assets/img/staticmap.png">
-		  </div>
-		  <p>This is where you are</p>
-		  <div class="app_button" id="welcome_button">Go Back</div>
-		</div>
 
-		<div id="settings" class="view">
-		  <form id="settings_form">
-		    <fieldset>
-		      <legend>Map Type</legend>
-			  <input type="radio" name="map" value="roadmap" checked>Road Map<br/>
-		      <input type="radio" name="map" value="satellite">Satellite<br/>
-		      <input type="radio" name="map" value="terrain">Terrain<br/>
-		      <input type="radio" name="map" value="hybrid">Hybrid<br/>
-		    </fieldset>
-		    <fieldset>
-		      <legend>Zoom Level</legend>
-  		      <input type="radio" name="zoom" value="10">Super Far<br/>
-  		      <input type="radio" name="zoom" value="12">Far<br/>
-  		      <input type="radio" name="zoom" value="15" checked>Normal<br/>
-  		      <input type="radio" name="zoom" value="18">Close<br/>
-  		      <input type="radio" name="zoom" value="20">Super Close<br/>
-  		     </fieldset>
-		      <button id="save_button">Save</button>
-	      </form>
-		</div>
 
-	</body>
+	</div>
+
+	<div data-role="footer" class="footer-docs" data-theme="c">
+			<p>&copy; 2011-12 The jQuery Foundation</p>
+	</div>
+
+</div>
+</body>
 </html>
