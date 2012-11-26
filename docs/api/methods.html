@@ -4,12 +4,12 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>jQuery Mobile Docs - Methods</title>
-	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile-1.1.0.css" />
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile-1.2.0.css" />
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 
 	<script src="../../js/jquery.js"></script>
 	<script src="../../docs/_assets/js/jqm-docs.js"></script>
-	<script src="../../js/jquery.mobile-1.1.0.js"></script>
+	<script src="../../js/jquery.mobile-1.2.0.js"></script>
 
 </head>
 <body>
@@ -29,7 +29,7 @@
 
 
 		<dl>
-			<dt><code>$.mobile.changePage</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.changePage()</code> (<em>method</em>)</dt>
 			<dd>Programmatically change from one page to another. This method is used internally for the page loading and transitioning that occurs as a result of clicking a link or submitting a form, when those features are enabled.</dd>
 
 			<dd>
@@ -63,8 +63,8 @@
 										</ul>
 									</li>
 								  <li><code>reverse</code> (<em>boolean</em>,	default:	false) Decides what direction the transition will run when showing the page. </li>
-									<li><code>showLoadMsg</code> (<em>boolean</em>,	default:	true) Decides whether or not to show the loading message when loading external pages.</li>
 									<li><code>role</code> (<em>string</em>,	default:	undefined) The data-role value to be used when displaying the page. By default this is undefined which means rely on the value of the @data-role attribute defined on the element.</li>
+									<li><code>showLoadMsg</code> (<em>boolean</em>,	default:	true) Decides whether or not to show the loading message when loading external pages.</li>
 									<li><code>transition</code> (<em>string</em>,	default:	$.mobile.defaultPageTransition)	The transition to use when showing the page. </li>
 									<li><code>type</code> (<em>string</em>, default: &quot;get&quot;) Specifies the method ("get" or "post") to use when making a page request.
 										<ul>
@@ -85,7 +85,7 @@
 <strong>//transition to the "about us" page with a slideup transition</strong>
 $.mobile.changePage( "about/us.html", { transition: "slideup"} );
 
-<strong>//transition to the "search results" page, using data from a form with an ID of "search"" 	</strong>
+<strong>//transition to the "search results" page, using data from a form with an id of "search"</strong>
 $.mobile.changePage( "searchresults.php", {
 	type: "post",
 	data: $("form#search").serialize()
@@ -104,7 +104,7 @@ $.mobile.changePage( "../alerts/confirm.html", {
 			</dd>
 
 
-			<dt><code>$.mobile.loadPage</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.loadPage()</code> (<em>method</em>)</dt>
 			<dd>Load an external page, enhance its content, and insert it into the DOM. This method is called internally by the changePage() function when its first argument is a URL. This function does not affect the current active page so it can be used to load pages in the background. The function returns a deferred promise object that gets resolved after the page has been enhanced and inserted into the document.</dd>
 
 			<dd>
@@ -122,6 +122,7 @@ $.mobile.changePage( "../alerts/confirm.html", {
 									<li><code>pageContainer</code> (jQuery collection,	default:	$.mobile.pageContainer) Specifies the element that should contain the page after it is loaded. </li>
 									<li><code>reloadPage</code> (<em>boolean</em>, default: false) Forces a reload of a page, even if it is already in the DOM of the page container. </li>
 									<li><code>role</code> (<em>string</em>,	default:	undefined) The data-role value to be used when displaying the page. By default this is undefined which means rely on the value of the @data-role attribute defined on the element.</li>
+									<li><code>showLoadMsg</code> (<em>boolean</em>,	default: false) Decides whether or not to show the loading message when loading external pages.</li>
 									<li><code>type</code> (<em>string</em>, default: &quot;get&quot;) Specifies the method ("get" or "post") to use when making a page request.
 									</li>
 								</ul>
@@ -138,7 +139,7 @@ $.mobile.changePage( "../alerts/confirm.html", {
 <strong>//load the "about us" page into the DOM</strong>
 $.mobile.loadPage( "about/us.html" );
 
-<strong>//load a "search results" page, using data from a form with an ID of "search"" 	</strong>
+<strong>//load a "search results" page, using data from a form with an id of "search"</strong>
 $.mobile.loadPage( "searchresults.php", {
 	type: "post",
 	data: $("form#search").serialize()
@@ -156,10 +157,12 @@ $.mobile.loadPage( "searchresults.php", {
 					<dd>See jQuery's <a href="http://api.jquery.com/jQuery.data/">data</a> and <a href="http://api.jquery.com/jQuery.removeData/">removeData</a> methods</dd>
 					<strong>Note: </strong>Calling jqmData() with no argument will return <code>undefined</code>. This behavior is subject to change in future versions.
 					<dt><code>&#183;</code> Also:</dt>
-					<dd>When finding elements by their jQuery Mobile data attribute, please use the custom selector <code>:jqmData()</code>, as it automatically incorporates namespaced data attributes into the lookup when they are in use. For example, instead of calling <code>$("div[data-role='page']")</code>, you should use <code>$("div:jqmData(role='page')")</code>, which internally maps to <code>$("div[data-"+ $.mobile.ns +"role='page']")</code> without forcing you to concatenate a namespace into your selectors manually.</dd>
+					<dd>
+            <p>When finding elements by their jQuery Mobile data attribute, please use the custom selector <code>:jqmData()</code>. It automatically incorporates namespaced data attributes into the lookup when they are in use. For example, instead of calling <code>$("div[data-role='page']")</code>, you should use <code>$("div:jqmData(role='page')")</code>, which internally maps to <code>$("div[data-"+ $.mobile.ns +"role='page']")</code> without forcing you to concatenate a namespace into your selectors manually.<p>
+            <p>One exception to this rule is selecting on namespaced data attributes with URL values, e.g the <code>:jqmData(url)</code> that jQuery Mobile uses to track where a page came from. This is because the selector requires a closing parentheses but the parentheses is also valid URL character.</p>
+          </dd>
 				</dl>
 			</dd>
-
 
 			<dt><code>$.fn.jqmEnhanceable()</code> (<em>method</em>)</dt>
 			<dd>For users that wish to respect <code>data-enhance=false</code> parent elements during manual enhancement or custom plugin authoring jQuery Mobile provides the <code>$.fn.jqmEnhanceable</code> filter method.</dd>
@@ -183,8 +186,35 @@ $.mobile.loadPage( "searchresults.php", {
 				</dl>
 			</dd>
 
-			<dt><code>$.mobile.showPageLoadingMsg</code> (<em>method</em>)</dt>
-			<dd>Show the page loading message, which is configurable via $.mobile.loadingMessage.</dd>
+			<dt><code>$.mobile.loading()</code> (<em>method</em>)</dt>
+			<dd>Show or hide the page loading message, which is configurable via <code>$.mobile.loader</code> prototype options as described in the <a href="../pages/loader.html">widget docs</a> or can be controlled via a params object.</dd>
+			<dd>
+				<dl>
+					<dt><code>&#183;</code> Object Param Arguments</dt>
+					<dd><code>theme</code> (<em>string</em>, default: "a") The theme swatch for the message.</dd>
+					<dd><code>text</code> (<em>string</em>, default: "loading") The text of the message.</dd>
+					<dd><code>textonly</code> (<em>boolean</em>, default: false) If true, the "spinner" image will be hidden when the message is shown.</dd>
+					<dd><code>textVisible</code> (<em>boolean</em>, default: false) If true, the text value will be used under the spinner.</dd>
+					<dd><code>html</code> (<em>string</em>, default: "") If this is set to a non empty string value, it will be used to replace the entirety of the loader's inner html.</dd>
+				</dl>
+			</dd>
+			<dd>Examples:
+			<pre>
+			<code>
+<strong>//cue the page loader</strong>
+$.mobile.loading( 'show' );
+
+<strong>//use theme swatch "b", a custom message, and no spinner</strong>
+$.mobile.loading( 'show', { theme: "b", text: "foo", textonly: true });
+			</code>
+			</pre>
+
+			</dd>
+
+			<dt><code>$.mobile.showPageLoadingMsg()</code> (<em>method</em>)</dt>
+			<dd>
+        <p class="ui-body ui-body-e"><strong>Deprecated</strong> in 1.2 - use <code>$.mobile.loading( 'show' )</code> instead, see examples above</p>
+        Show the page loading message, which is configurable via $.mobile.loadingMessage.</dd>
 			<dd>
 				<dl>
 					<dt><code>&#183;</code> Arguments</dt>
@@ -209,9 +239,13 @@ $.mobile.showPageLoadingMsg("b", "This is only a test", true);
 
 
 
-			<dt><code>$.mobile.hidePageLoadingMsg</code> (<em>method</em>)</dt>
-			<dd>Hide the page loading message, which is configurable via $.mobile.loadingMessage.</dd>
 
+			<dt><code>$.mobile.hidePageLoadingMsg()</code> (<em>method</em>)</dt>
+			<dd>
+        <p class="ui-body ui-body-e"><strong>Deprecated</strong> in 1.2 - use <code>$.mobile.loading( 'hide' )</code> instead, see examples above</p>
+        Hide the page loading message, which is configurable via $.mobile.loadingMessage.
+
+      </dd>
 			<dd>Example:
 			<pre>
 			<code>
@@ -222,8 +256,10 @@ $.mobile.hidePageLoadingMsg();
 
 			</dd>
 
-			<dt><code>$.mobile.fixedToolbars.show</code> (<em>method</em>)</dt>
-			<dd>Utility method for displaying the fixed header and/or footer of the current active page within the viewport. Note that fixed headers/footers are never really hidden. Toggling the show/hide state of a toolbar is really toggling whether or not they are inline within the page content, or displayed within the viewport as if they were fixed.</dd>
+			<dt><code>$.mobile.fixedToolbars.show()</code> (<em>method</em>)</dt>
+			<dd>
+			<p class="ui-body ui-body-e"><strong>Deprecated</strong> in 1.1 <code> </code></p> 
+			Utility method for displaying the fixed header and/or footer of the current active page within the viewport. Note that fixed headers/footers are never really hidden. Toggling the show/hide state of a toolbar is really toggling whether or not they are inline within the page content, or displayed within the viewport as if they were fixed.</dd>
 			<dd>
 				<dl>
 					<dt><code>&#183;</code> Arguments</dt>
@@ -243,8 +279,9 @@ $.mobile.fixedToolbars.show(true);
 
 			</dd>
 
-			<dt><code>$.mobile.fixedToolbars.hide</code> (<em>method</em>)</dt>
-			<dd>Utility method for hiding the fixed header and/or footer of the current active page.</dd>
+			<dt><code>$.mobile.fixedToolbars.hide()</code> (<em>method</em>)</dt>
+			<dd><p class="ui-body ui-body-e"><strong>Deprecated</strong> in 1.1 <code> </code></p> 
+			Utility method for hiding the fixed header and/or footer of the current active page.</dd>
 			<dd>
 				<dl>
 					<dt><code>&#183;</code> Arguments</dt>
@@ -264,7 +301,7 @@ $.mobile.fixedToolbars.hide(true);
 
 			</dd>
 
-			<dt><code>$.mobile.path.parseUrl</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.path.parseUrl()</code> (<em>method</em>)</dt>
 			<dd>Utility method for parsing a URL and its relative variants into an object that makes accessing the components of the URL easy. When parsing relative variants, the resulting object will contain empty string values for missing components (like protocol, host, etc). Also, when parsing URLs that have no authority, such as tel: urls, the pathname property of the object will contain the data after the protocol/scheme colon.</dd>
 
 			<dd>
@@ -278,7 +315,7 @@ $.mobile.fixedToolbars.hide(true);
 						<p>This function returns an object that contains the various components of the URL as strings. The properties on the object mimic the browser's location object:</p>
 						<dl>
 							<dt><code>hash</code></dt>
-							<dd>The fragment conponent of the URL, including the leading '#' character.</dd>
+							<dd>The fragment component of the URL, including the leading '#' character.</dd>
 							<dt><code>host</code></dt>
 							<dd>The host and port number of the URL.</dd>
 							<dt><code>hostname</code></dt>
@@ -348,7 +385,7 @@ var obj = $.mobile.path.parseUrl("http://jblas:password@mycompany.com:8080/mail/
 			</dd>
 
 
-			<dt><code>$.mobile.path.makePathAbsolute</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.path.makePathAbsolute()</code> (<em>method</em>)</dt>
 			<dd>Utility method for converting a relative file or directory path into an absolute path.</dd>
 			<dd>
 				<dl>
@@ -375,7 +412,7 @@ var absPath = $.mobile.path.makePathAbsolute("../../foo/file.html", "/a/b/c/bar.
 			</dd>
 
 
-			<dt><code>$.mobile.path.makeUrlAbsolute</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.path.makeUrlAbsolute()</code> (<em>method</em>)</dt>
 			<dd>Utility method for converting a relative URL to an absolute URL.</dd>
 			<dd>
 
@@ -413,7 +450,7 @@ var absUrl = $.mobile.path.makeUrlAbsolute("#bar", "http://foo.com/a/b/c/test.ht
 			</dd>
 
 
-			<dt><code>$.mobile.path.isSameDomain</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.path.isSameDomain()</code> (<em>method</em>)</dt>
 			<dd>Utility method for comparing the domain of 2 URLs.</dd>
 			<dd>
 
@@ -448,7 +485,7 @@ var same = $.mobile.path.isSameDomain("http://foo.com/a/file.html", "http://bar.
 			</dd>
 
 
-			<dt><code>$.mobile.path.isRelativeUrl</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.path.isRelativeUrl()</code> (<em>method</em>)</dt>
 			<dd>Utility method for determining if a URL is a relative variant.</dd>
 			<dd>
 
@@ -489,7 +526,7 @@ var isRel = $.mobile.path.isRelativeUrl("#foo");
 			</dd>
 
 
-			<dt><code>$.mobile.path.isAbsoluteUrl</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.path.isAbsoluteUrl()</code> (<em>method</em>)</dt>
 			<dd>Utility method for determining if a URL is absolute.</dd>
 			<dd>
 
@@ -529,13 +566,61 @@ var isAbs = $.mobile.path.isAbsoluteUrl("#foo");
 
 			</dd>
 
+			<dt><code>$.mobile.path.get()</code> (<em>method</em>)</dt>
+			<dd>Utility method for determining the directory portion of an URL. If the URL has no trailing slash, the last component of the URL is considered to be a file.</dd>
+			<dd>
+
+				<dl>
+					<dt><code>&#183;</code> Arguments</dt>
+					<dd><code>url</code> (<em>string</em>, required) A relative or absolute URL.</dd>
+
+					<dt><code>&#183;</code> Return Value</dt>
+					<dd>This function returns the directory portion of a given URL.</dd>
+
+				</dl>
+			</dd>
+			<dd>Examples:
+			<pre>
+			<code>
+<strong>// Returns: http://foo.com/a/</strong>
+var dirName = $.mobile.path.get("http://foo.com/a/file.html");
+
+<strong>// Returns: http://foo.com/a/</strong>
+var dirName = $.mobile.path.get("http://foo.com/a/");
+
+<strong>// Returns: http://foo.com/a</strong>
+var dirName = $.mobile.path.get("http://foo.com/a");
+
+<strong>// Returns: //foo.com/a/</strong>
+var dirName = $.mobile.path.get("//foo.com/a/file.html");
+
+<strong>// Returns: /a/</strong>
+var dirName = $.mobile.path.get("/a/file.html");
+
+<strong>// Returns: ""</strong>
+var dirName = $.mobile.path.get("file.html");
+
+<strong>// Returns: /</strong>
+var dirName = $.mobile.path.get("/file.html");
+
+<strong>// Returns: ?a=1&amp;b=2</strong>
+var dirName = $.mobile.path.get("?a=1&amp;b=2");
+
+<strong>// Returns: foo</strong>
+var dirName = $.mobile.path.isAbsoluteUrl("#foo");
+
+
+			</code>
+			</pre>
+
+			</dd>
 
 			<dt><code>$.mobile.base</code> (<em>methods, properties</em>)</dt>
 			<dd>Utilities for working with generated base element. TODO: document as public API is finalized.</dd>
 
 
 
-			<dt><code>$.mobile.silentScroll</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.silentScroll()</code> (<em>method</em>)</dt>
 			<dd>Scroll to a particular Y position without triggering scroll event listeners.</dd>
 			<dd>
 				<dl>
@@ -588,7 +673,8 @@ $.mobile.silentScroll(100);
 </div><!-- /content -->
 
 <div data-role="footer" class="footer-docs" data-theme="c">
-		<p>&copy; 2011-12 The jQuery Foundation</p>
+		<p class="jqm-version"></p>
+		<p>&copy; 2012 jQuery Foundation and other contributors</p>
 </div>
 
 </div><!-- /page -->
